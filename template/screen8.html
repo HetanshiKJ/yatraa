@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yatraa</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css">
+  <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+
+<header class="app-header">
+  <div class="logo">🌍 <strong>Yatraa</strong></div>
+  <nav>
+    <button onclick="location.href='screen7.html'">Profile</button>
+    <button onclick="location.href='screen8.html'">Explore</button>
+    <button onclick="location.href='screen9.html'">Itinerary</button>
+  </nav>
+</header>
+
+<main>
+  <section class="screen">
+
+    <div class="page-title">
+      <div>
+        <h1>Indian Activity / City Search</h1>
+        <p>Discover Indian destinations and activities for your trip.</p>
+      </div>
+      <button onclick="location.href='screen9.html'">View Itinerary →</button>
+    </div>
+
+    <div class="search-panel">
+      <input id="searchInput" type="search" placeholder="Search city or activity...">
+
+      <select id="groupFilter">
+        <option value="all">Group By</option>
+        <option value="city">City</option>
+        <option value="category">Category</option>
+      </select>
+
+      <select id="categoryFilter">
+        <option value="all">Filter</option>
+        <option value="Sightseeing">Sightseeing</option>
+        <option value="Food">Food</option>
+        <option value="Adventure">Adventure</option>
+        <option value="Culture">Culture</option>
+        <option value="Nature">Nature</option>
+      </select>
+
+      <select id="sortFilter">
+        <option value="popular">Sort By</option>
+        <option value="name">Name</option>
+        <option value="cost-low">Cost: Low → High</option>
+        <option value="cost-high">Cost: High → Low</option>
+        <option value="duration">Duration</option>
+      </select>
+    </div>
+
+    <div class="search-result-header">
+      <h2>Results</h2>
+      <span id="resultCount"></span>
+    </div>
+
+    <div id="searchResults" class="search-results"></div>
+
+  </section>
+</main>
+
+<footer>GlobeTrotter India © 2026</footer>
+
+<script src="data.js"></script>
+<script src="screen8.js"></script>
+</body>
+</html>
