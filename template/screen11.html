@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yatraa</title>
+
+<!-- Water.css (light theme) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css">
+
+<style>
+  /* Minimal additions only — everything else inherits water.css light defaults */
+
+  header.topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+
+  header.topbar .avatar{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1.5px solid;
+  }
+
+  .toolbar{
+    display:flex;
+    gap: 10px;
+    align-items:center;
+    flex-wrap: wrap;
+  }
+
+  .toolbar input[type="search"]{
+    flex: 1;
+    min-width: 180px;
+    margin: 0;
+  }
+
+  .toolbar button{
+    white-space: nowrap;
+  }
+
+  h1.page-title{
+    text-align:center;
+  }
+
+  .cal-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+
+  .nav-btn{
+    font-size: 1.3rem;
+    line-height: 1;
+    padding: 6px 14px;
+  }
+
+  .cal-month{
+    font-size: 1.35rem;
+    font-weight: 700;
+  }
+
+  .cal-weekdays{
+    display:grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-bottom: 4px;
+  }
+  .cal-weekdays div{
+    text-align:left;
+    padding: 6px;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+    text-transform: uppercase;
+    opacity: 0.65;
+  }
+
+  .cal-grid{
+    display:grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-auto-rows: minmax(64px, auto);
+    border-top: 1px solid;
+    border-left: 1px solid;
+  }
+
+  .cal-cell{
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+    padding: 8px;
+    min-height: 64px;
+    overflow: hidden;
+  }
+
+  .cal-cell.pad{
+    opacity: 0.45;
+  }
+
+  .cal-cell .daynum{
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .cal-cell.today .daynum{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid;
+    font-weight: 700;
+  }
+
+  .trip-chip{
+    margin-top: 6px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    line-height: 1.25;
+    padding: 3px 6px;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.25);
+  }
+
+  /* Stripe shape communicates span: rounded cap where a trip starts/ends,
+     square where it continues into the next/previous day */
+  .trip-chip.cap-start{ border-top-left-radius: 5px; border-bottom-left-radius: 5px; margin-left: 0; }
+  .trip-chip.cap-end{ border-top-right-radius: 5px; border-bottom-right-radius: 5px; }
+  .trip-chip.continues-left{ margin-left: -8px; padding-left: 8px; }
+  .trip-chip.continues-right{ margin-right: -8px; padding-right: 8px; }
+
+  .legend{
+    display:flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 18px;
+  }
+  .legend span{
+    display:inline-flex;
+    align-items:center;
+    gap: 6px;
+    font-size: 0.8rem;
+  }
+  .legend i{
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    display:inline-block;
+  }
+
+  @media (max-width: 560px){
+    .cal-cell{ min-height: 52px; padding: 5px; }
+    .trip-chip{ font-size: 0.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <strong>Yatraa</strong>
+</header>
+
+<div class="toolbar">
+  <input type="search" id="tripSearch" placeholder="Search trips…" aria-label="Search trips">
+  <button id="groupByBtn" type="button">Group by</button>
+  <button id="filterBtn" type="button">Filter</button>
+  <button id="sortByBtn" type="button">Sort by…</button>
+</div>
+
+<h1 class="page-title">Calendar View</h1>
+
+<section class="cal-header">
+  <button class="nav-btn" id="prevMonth" type="button" aria-label="Previous month">&larr;</button>
+  <div class="cal-month" id="monthLabel"></div>
+  <button class="nav-btn" id="nextMonth" type="button" aria-label="Next month">&rarr;</button>
+</section>
+
+<div class="cal-weekdays">
+  <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+</div>
+
+<div class="cal-grid" id="calGrid"></div>
+
+<div class="legend" id="legend"></div>
+
+<script>
+(function(){
+  // ---- Sample itinerary data (edit / wire up to real data as needed) ----
+  const trips = [
+    { name: "Paris Trip",      start: "2026-01-04", end: "2026-01-05", color: "#e0507a" },
+    { name: "NYC Getaway",     start: "2026-01-15", end: "2026-01-18", color: "#3d8bd6" },
+    { name: "Japan Adventure", start: "2026-02-16", end: "2026-02-21", color: "#3ba86b" },
+  ];
+
+  const monthLabel = document.getElementById("monthLabel");
+  const calGrid = document.getElementById("calGrid");
+  const legend = document.getElementById("legend");
+  const prevBtn = document.getElementById("prevMonth");
+  const nextBtn = document.getElementById("nextMonth");
+  const searchInput = document.getElementById("tripSearch");
+
+  let viewDate = new Date(2026, 0, 1); // January 2024, matches the reference screen
+  let activeQuery = "";
+
+  const MONTH_NAMES = ["January","February","March","April","May","June",
+                        "July","August","September","October","November","December"];
+
+  function toISO(y, m, d){
+    return `${y}-${String(m+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
+  }
+
+  function tripsForDate(iso){
+    return trips.filter(t => iso >= t.start && iso <= t.end &&
+      (activeQuery === "" || t.name.toLowerCase().includes(activeQuery)));
+  }
+
+  function isTripStart(t, iso){ return iso === t.start; }
+  function isTripEnd(t, iso){ return iso === t.end; }
+
+  function addDaysISO(iso, delta){
+    const [y, m, d] = iso.split("-").map(Number);
+    const dt = new Date(y, m - 1, d + delta);
+    return toISO(dt.getFullYear(), dt.getMonth(), dt.getDate());
+  }
+
+  function render(){
+    const year = viewDate.getFullYear();
+    const month = viewDate.getMonth();
+    monthLabel.textContent = `${MONTH_NAMES[month]} ${year}`;
+
+    const firstDow = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const daysInPrevMonth = new Date(year, month, 0).getDate();
+    const todayISO = toISO(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+
+    calGrid.innerHTML = "";
+
+    const totalCells = Math.ceil((firstDow + daysInMonth) / 7) * 7;
+
+    for(let i = 0; i < totalCells; i++){
+      const cell = document.createElement("div");
+      cell.className = "cal-cell";
+
+      let dayNum, cellISO, isPad = false;
+
+      if(i < firstDow){
+        dayNum = daysInPrevMonth - firstDow + i + 1;
+        const pm = month === 0 ? 11 : month - 1;
+        const py = month === 0 ? year - 1 : year;
+        cellISO = toISO(py, pm, dayNum);
+        isPad = true;
+      } else if(i >= firstDow + daysInMonth){
+        dayNum = i - (firstDow + daysInMonth) + 1;
+        const nm = month === 11 ? 0 : month + 1;
+        const ny = month === 11 ? year + 1 : year;
+        cellISO = toISO(ny, nm, dayNum);
+        isPad = true;
+      } else {
+        dayNum = i - firstDow + 1;
+        cellISO = toISO(year, month, dayNum);
+      }
+
+      if(isPad) cell.classList.add("pad");
+      if(cellISO === todayISO) cell.classList.add("today");
+
+      const num = document.createElement("div");
+      num.className = "daynum";
+      num.textContent = dayNum;
+      cell.appendChild(num);
+
+      if(!isPad){
+        const dayTrips = tripsForDate(cellISO);
+        dayTrips.forEach(t => {
+          const chip = document.createElement("div");
+          const startsHere = isTripStart(t, cellISO);
+          const endsHere = isTripEnd(t, cellISO);
+          const prevInView = cellISO !== t.start && addDaysISO(cellISO, -1) >= t.start;
+          const nextInView = cellISO !== t.end && addDaysISO(cellISO, 1) <= t.end;
+
+          let cls = "trip-chip";
+          if(startsHere) cls += " cap-start";
+          if(endsHere) cls += " cap-end";
+          if(prevInView) cls += " continues-left";
+          if(nextInView) cls += " continues-right";
+          chip.className = cls;
+
+          chip.style.background = t.color;
+          chip.title = `${t.name} (${t.start} → ${t.end})`;
+          chip.textContent = startsHere ? t.name : "\u00A0";
+          cell.appendChild(chip);
+        });
+      }
+
+      calGrid.appendChild(cell);
+    }
+
+    renderLegend();
+  }
+
+  function renderLegend(){
+    const seen = new Map();
+    trips.forEach(t => { if(!seen.has(t.name)) seen.set(t.name, t.color); });
+    legend.innerHTML = "";
+    seen.forEach((color, name) => {
+      const span = document.createElement("span");
+      span.innerHTML = `<i style="background:${color}"></i>${name}`;
+      legend.appendChild(span);
+    });
+  }
+
+  prevBtn.addEventListener("click", () => {
+    viewDate = new Date(viewDate.getFullYear(), viewDate.getMonth() - 1, 1);
+    render();
+  });
+  nextBtn.addEventListener("click", () => {
+    viewDate = new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 1);
+    render();
+  });
+  searchInput.addEventListener("input", (e) => {
+    activeQuery = e.target.value.trim().toLowerCase();
+    render();
+  });
+
+  ["groupByBtn","filterBtn","sortByBtn"].forEach(id => {
+    document.getElementById(id).addEventListener("click", () => {
+      alert(id.replace("Btn","") + " — wire this up to your itinerary data model.");
+    });
+  });
+
+  render();
+})();
+</script>
+
+</body>
+</html>

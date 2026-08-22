@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GlobalTrotter · Admin Panel</title>
+
+<!-- Water.css (light theme) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css">
+
+<style>
+  /* Minimal additions only — everything else inherits water.css light defaults */
+
+  header.topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+
+  header.topbar .avatar{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1.5px solid;
+  }
+
+  .toolbar{
+    display:flex;
+    gap: 10px;
+    align-items:center;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+
+  .toolbar input[type="search"]{
+    flex: 1;
+    min-width: 180px;
+    margin: 0;
+  }
+
+  .toolbar button{
+    white-space: nowrap;
+  }
+
+  /* ---------- Tabs ---------- */
+  .tabs{
+    display:flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 22px;
+  }
+
+  .tabs button{
+    background: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+
+  .tabs button[aria-selected="true"]{
+    background: var(--text-bright, #1b1d24);
+    color: var(--background, #fff);
+  }
+
+  /* ---------- Panel card ---------- */
+  .panel-card{
+    border: 1px solid var(--border, #d1d5db);
+    border-radius: 14px;
+    padding: 26px;
+    background: var(--background-alt, #f5f7f9);
+  }
+
+  .panel-card h2{
+    margin-top: 0;
+    font-size: 1.05rem;
+  }
+
+  .grid-2{
+    display:grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 28px;
+    align-items:start;
+  }
+
+  /* ---------- Traveler list (top-left, dashboard) ---------- */
+  .traveler-list{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .traveler-list li{
+    display:flex;
+    align-items:center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border, #e2e5e9);
+  }
+  .traveler-list li:last-child{ border-bottom: none; }
+
+  .avatar-circle{
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  .traveler-info{
+    flex: 1;
+    min-width: 0;
+  }
+  .traveler-info .name{
+    font-weight: 600;
+    font-size: 0.88rem;
+  }
+  .traveler-info .meta{
+    font-size: 0.75rem;
+    opacity: 0.65;
+  }
+
+  .trip-count{
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: var(--border, #e2e5e9);
+  }
+
+  /* ---------- Pie chart (conic-gradient, no libraries) ---------- */
+  .pie-wrap{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    gap: 14px;
+  }
+
+  .pie{
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+  }
+
+  .pie-legend{
+    display:flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    justify-content:center;
+    font-size: 0.8rem;
+  }
+  .pie-legend span{
+    display:inline-flex;
+    align-items:center;
+    gap: 6px;
+  }
+  .pie-legend i{
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    display:inline-block;
+  }
+
+  /* ---------- Line chart ---------- */
+  .line-chart-wrap{
+    margin-top: 8px;
+  }
+  .line-chart-wrap svg{
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+  .line-chart-wrap .axis{
+    stroke: var(--border, #c7cad1);
+    stroke-width: 2;
+  }
+  .line-chart-wrap .trend-line{
+    fill: none;
+    stroke: var(--text-bright, #444b58);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .line-chart-wrap .trend-dot{
+    fill: #c0475a;
+    stroke: var(--background-alt, #f5f7f9);
+    stroke-width: 3;
+  }
+  .line-chart-wrap text{
+    font-size: 10px;
+    fill: var(--text-bright, #444b58);
+    opacity: 0.65;
+  }
+
+  /* ---------- Bar chart ---------- */
+  .bar-chart{
+    display:flex;
+    align-items:flex-end;
+    gap: 18px;
+    height: 160px;
+    padding-top: 10px;
+  }
+  .bar-col{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    gap: 8px;
+    flex: 1;
+  }
+  .bar{
+    width: 100%;
+    max-width: 46px;
+    background: #f4a765;
+    border-radius: 6px 6px 0 0;
+  }
+  .bar-col .bar-label{
+    font-size: 0.72rem;
+    text-align:center;
+    opacity: 0.75;
+  }
+  .bar-col .bar-value{
+    font-size: 0.72rem;
+    font-weight: 700;
+  }
+
+  /* ---------- Ranked list (bottom-right) ---------- */
+  .ranked-list{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 1px solid var(--border, #d1d5db);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .ranked-list .list-head{
+    background: var(--text-bright, #444b58);
+    color: var(--background, #fff);
+    padding: 9px 14px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    display:flex;
+    justify-content:space-between;
+  }
+  .ranked-list li:not(.list-head){
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border, #e2e5e9);
+    background: var(--background, #fff);
+  }
+  .ranked-list .rank{
+    opacity: 0.55;
+    font-variant-numeric: tabular-nums;
+    margin-right: 8px;
+  }
+  .ranked-list .count{
+    font-weight: 700;
+  }
+
+  /* ---------- Manage users table ---------- */
+  table.users-table{
+    font-size: 0.88rem;
+  }
+  .status-pill{
+    padding: 2px 9px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+  }
+  .status-active{ background: #d7f0e0; color: #1e7a46; }
+  .status-invited{ background: #fde8cf; color: #a6620b; }
+
+  .row-spacer{ margin-top: 30px; }
+
+  @media (max-width: 720px){
+    .grid-2{ grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <strong>Yatraa</strong>
+  
+</header>
+
+<div class="toolbar">
+  <input type="search" id="adminSearch" placeholder="Search users, cities, activities…" aria-label="Search">
+  <button id="groupByBtn" type="button">Group by</button>
+  <button id="filterBtn" type="button">Filter</button>
+  <button id="sortByBtn" type="button">Sort by…</button>
+</div>
+
+<nav class="tabs" role="tablist" aria-label="Admin sections">
+  <button type="button" role="tab" data-tab="users" aria-selected="false">Manage Users</button>
+  <button type="button" role="tab" data-tab="cities" aria-selected="false">Popular Cities</button>
+  <button type="button" role="tab" data-tab="activities" aria-selected="false">Popular Activities</button>
+  <button type="button" role="tab" data-tab="trends" aria-selected="true">User Trends and Analytics</button>
+</nav>
+
+<!-- ===================== MANAGE USERS ===================== -->
+<section id="panel-users" class="panel-card" hidden>
+  <h2>Manage Users</h2>
+  <table class="users-table">
+    <thead>
+      <tr><th>Name</th><th>Email</th><th>Trips planned</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Meera Shah</td><td>meera.shah@example.com</td><td>18</td><td><span class="status-pill status-active">Active</span></td></tr>
+      <tr><td>Rohan Verma</td><td>rohan.verma@example.com</td><td>14</td><td><span class="status-pill status-active">Active</span></td></tr>
+      <tr><td>Elena Cruz</td><td>elena.cruz@example.com</td><td>11</td><td><span class="status-pill status-active">Active</span></td></tr>
+      <tr><td>Jamal Osei</td><td>jamal.osei@example.com</td><td>9</td><td><span class="status-pill status-invited">Invited</span></td></tr>
+      <tr><td>Priya Nair</td><td>priya.nair@example.com</td><td>7</td><td><span class="status-pill status-active">Active</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ===================== POPULAR CITIES ===================== -->
+<section id="panel-cities" class="panel-card" hidden>
+  <h2>Popular Cities</h2>
+  <ul class="ranked-list">
+    <li class="list-head"><span>City</span><span>Trips booked</span></li>
+    <li><span><span class="rank">1</span>Paris</span><span class="count">312</span></li>
+    <li><span><span class="rank">2</span>Tokyo</span><span class="count">276</span></li>
+    <li><span><span class="rank">3</span>New York</span><span class="count">241</span></li>
+    <li><span><span class="rank">4</span>Rome</span><span class="count">198</span></li>
+    <li><span><span class="rank">5</span>Bali</span><span class="count">164</span></li>
+  </ul>
+</section>
+
+<!-- ===================== POPULAR ACTIVITIES ===================== -->
+<section id="panel-activities" class="panel-card" hidden>
+  <h2>Popular Activities</h2>
+  <div class="bar-chart" id="activitiesBarChart"></div>
+</section>
+
+<!-- ===================== USER TRENDS AND ANALYTICS (dashboard) ===================== -->
+<section id="panel-trends" class="panel-card">
+  <h2>User Trends and Analytics</h2>
+
+  <div class="grid-2">
+    <ul class="traveler-list">
+      <li>
+        <span class="avatar-circle" style="background:#7a7f8c">MS</span>
+        <span class="traveler-info"><span class="name">Meera Shah</span><br><span class="meta">Last trip: Kyoto, Japan</span></span>
+        <span class="trip-count">18 trips</span>
+      </li>
+      <li>
+        <span class="avatar-circle" style="background:#7a7f8c">RV</span>
+        <span class="traveler-info"><span class="name">Rohan Verma</span><br><span class="meta">Last trip: Lisbon, Portugal</span></span>
+        <span class="trip-count">14 trips</span>
+      </li>
+      <li>
+        <span class="avatar-circle" style="background:#7a7f8c">EC</span>
+        <span class="traveler-info"><span class="name">Elena Cruz</span><br><span class="meta">Last trip: Cape Town, South Africa</span></span>
+        <span class="trip-count">11 trips</span>
+      </li>
+      <li>
+        <span class="avatar-circle" style="background:#7a7f8c">JO</span>
+        <span class="traveler-info"><span class="name">Jamal Osei</span><br><span class="meta">Last trip: Reykjavik, Iceland</span></span>
+        <span class="trip-count">9 trips</span>
+      </li>
+    </ul>
+
+    <div class="pie-wrap">
+      <div class="pie" id="tripTypePie"></div>
+      <div class="pie-legend">
+        <span><i style="background:#4f9bd6"></i>International — 74%</span>
+        <span><i style="background:#6cbf6c"></i>Domestic — 26%</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-spacer">
+    <h2>Monthly Active Planners</h2>
+    <div class="line-chart-wrap">
+      <svg viewBox="0 0 640 200" id="lineChart"></svg>
+    </div>
+  </div>
+
+  <div class="row-spacer grid-2">
+    <div>
+      <h2>Top Activities Booked</h2>
+      <div class="bar-chart" id="trendsBarChart"></div>
+    </div>
+
+    <ul class="ranked-list">
+      <li class="list-head"><span>City</span><span>Trips booked</span></li>
+      <li><span><span class="rank">1</span>Paris</span><span class="count">312</span></li>
+      <li><span><span class="rank">2</span>Tokyo</span><span class="count">276</span></li>
+      <li><span><span class="rank">3</span>New York</span><span class="count">241</span></li>
+      <li><span><span class="rank">4</span>Rome</span><span class="count">198</span></li>
+      <li><span><span class="rank">5</span>Bali</span><span class="count">164</span></li>
+    </ul>
+  </div>
+</section>
+
+<script>
+(function(){
+  // ---- Tab switching ----
+  const tabs = document.querySelectorAll('.tabs button[role="tab"]');
+  const panels = {
+    users: document.getElementById('panel-users'),
+    cities: document.getElementById('panel-cities'),
+    activities: document.getElementById('panel-activities'),
+    trends: document.getElementById('panel-trends')
+  };
+
+  function activate(tabName){
+    tabs.forEach(t => t.setAttribute('aria-selected', t.dataset.tab === tabName ? 'true' : 'false'));
+    Object.entries(panels).forEach(([name, el]) => { el.hidden = name !== tabName; });
+  }
+
+  tabs.forEach(t => t.addEventListener('click', () => activate(t.dataset.tab)));
+
+  // ---- Pie chart (trip type split) ----
+  document.getElementById('tripTypePie').style.background =
+    'conic-gradient(#4f9bd6 0% 74%, #6cbf6c 74% 100%)';
+
+  // ---- Bar chart data ----
+  const activityData = [
+    { label: "Museums", value: 68, color: "#f4a765" },
+    { label: "Hiking", value: 92, color: "#f4a765" },
+    { label: "Food tours", value: 121, color: "#f4a765" }
+  ];
+
+  function renderBarChart(containerId, data){
+    const container = document.getElementById(containerId);
+    const max = Math.max(...data.map(d => d.value));
+    container.innerHTML = "";
+    data.forEach(d => {
+      const col = document.createElement('div');
+      col.className = 'bar-col';
+      const heightPct = Math.round((d.value / max) * 100);
+      col.innerHTML = `
+        <span class="bar-value">${d.value}</span>
+        <div class="bar" style="height:${heightPct}%; background:${d.color}"></div>
+        <span class="bar-label">${d.label}</span>
+      `;
+      container.appendChild(col);
+    });
+  }
+
+  renderBarChart('trendsBarChart', activityData);
+  renderBarChart('activitiesBarChart', activityData);
+
+  // ---- Line chart (monthly active planners) ----
+  const months = ["Mar", "Apr", "May", "Jun", "Jul", "Aug"];
+  const values = [420, 610, 540, 705, 690, 812];
+
+  const svg = document.getElementById('lineChart');
+  const W = 640, H = 200, padL = 30, padB = 24, padT = 16, padR = 16;
+  const maxV = Math.max(...values) * 1.15;
+  const minV = 0;
+
+  const stepX = (W - padL - padR) / (values.length - 1);
+  function xAt(i){ return padL + i * stepX; }
+  function yAt(v){ return H - padB - ((v - minV) / (maxV - minV)) * (H - padB - padT); }
+
+  let svgHTML = `<line class="axis" x1="${padL}" y1="${padT}" x2="${padL}" y2="${H - padB}"/>`;
+  svgHTML += `<line class="axis" x1="${padL}" y1="${H - padB}" x2="${W - padR}" y2="${H - padB}"/>`;
+
+  const points = values.map((v, i) => `${xAt(i)},${yAt(v)}`).join(' ');
+  svgHTML += `<polyline class="trend-line" points="${points}"/>`;
+
+  values.forEach((v, i) => {
+    svgHTML += `<circle class="trend-dot" cx="${xAt(i)}" cy="${yAt(v)}" r="7"/>`;
+    svgHTML += `<text x="${xAt(i)}" y="${H - 4}" text-anchor="middle">${months[i]}</text>`;
+  });
+
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  svg.innerHTML = svgHTML;
+
+  // ---- Search placeholder wiring ----
+  ["groupByBtn","filterBtn","sortByBtn"].forEach(id => {
+    document.getElementById(id).addEventListener('click', () => {
+      alert(id.replace("Btn","") + " — wire this up to your admin data model.");
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
