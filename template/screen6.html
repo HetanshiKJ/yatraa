@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlobalTrotter - User Trip Listing</title>
+ 
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo">GlobalTrotter</div>
+        <div class="profile-icon">
+            <span class="user-avatar"></span>
+        </div>
+    </header>
+
+    <main class="trip-listing-container">
+
+        <section class="toolbar">
+            <div class="search-box">
+                <input type="text" placeholder="Search bar ......" id="search-input" aria-label="Search trips">
+            </div>
+            <div class="action-buttons">
+                <button type="button" class="btn" id="group-by-btn">Group by</button>
+                <button type="button" class="btn" id="filter-btn">Filter</button>
+                <button type="button" class="btn" id="sort-by-btn">Sort by...</button>
+            </div>
+        </section>
+
+        <section class="trip-category" id="ongoing-trips">
+            <h2 class="category-title">Ongoing</h2>
+            <div class="trip-card">
+                <p class="trip-overview">Short Over View of the Trip</p>
+            </div>
+        </section>
+
+        <section class="trip-category" id="upcoming-trips">
+            <h2 class="category-title">Up-coming</h2>
+            <div class="trip-card">
+                <p class="trip-overview">Short Over View of the Trip</p>
+            </div>
+        </section>
+
+        <section class="trip-category" id="completed-trips">
+            <h2 class="category-title">Completed</h2>
+            <div class="trip-card">
+                <p class="trip-overview">Short Over View of the Trip</p>
+            </div>
+            <div class="trip-card">
+                <p class="trip-overview">Short Over View of the Trip</p>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>
