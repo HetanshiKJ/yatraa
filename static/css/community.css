@@ -1,0 +1,39 @@
+.community-post{
+    background-color: whitesmoke;
+    padding: 20px;
+    margin: 10px 0px;
+}
+.community-post .post-avatar img{
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    padding: 0px;
+    object-fit: cover;
+}
+.community-post .user-name{
+    font-weight: 500;
+}
+.community-post .post-card{
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0px;
+}
+.community-post .ratings i{
+    font-size: 18px;   
+}
+.community-post .tags-div{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    /* background-color: pink; */
+    margin: 7px 0px;
+}
+.community-post .tags-div .tag{
+    font-size: 16px;
+    background-color: rgb(228, 228, 228);
+    border-radius: 5px;
+    padding: 7px;
+    font-weight: 400;
+    margin: 0px;
+}
