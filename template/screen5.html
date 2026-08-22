@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GlobalTrotter · Build Itinerary</title>
+
+<!-- Water.css (light theme) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css">
+
+<style>
+  /* Minimal additions only — everything else inherits water.css light defaults */
+
+  header.topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+
+  header.topbar .avatar{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1.5px solid;
+  }
+
+  h1.page-title{
+    margin-top: 6px;
+  }
+  .page-sub{
+    opacity: 0.65;
+    margin-top: -10px;
+    margin-bottom: 26px;
+    font-size: 0.9rem;
+  }
+
+  /* ---------- Section card ---------- */
+  #sectionsWrap{
+    display:flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .itinerary-section{
+    border: 1px solid var(--border, #d1d5db);
+    border-radius: 14px;
+    padding: 22px 24px;
+    background: var(--background-alt, #f5f7f9);
+    position: relative;
+  }
+
+  .itinerary-section h2{
+    margin: 0 0 6px;
+    font-size: 1.1rem;
+  }
+
+  .itinerary-section .section-desc{
+    margin: 0 0 18px;
+    font-size: 0.88rem;
+    opacity: 0.7;
+    line-height: 1.5;
+  }
+
+  .section-title-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+
+  .section-title-row input.section-name{
+    border: none;
+    background: none;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: 2px 4px;
+    margin: 0;
+    width: auto;
+    flex: 1;
+  }
+  .section-title-row input.section-name:focus{
+    outline: 1px dashed var(--border, #c7cad1);
+  }
+
+  .remove-section-btn{
+    background: none;
+    border: 1px solid var(--border, #d1d5db);
+    color: inherit;
+    font-size: 0.75rem;
+    padding: 5px 11px;
+    border-radius: 999px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .remove-section-btn:hover{
+    background: #fbdada;
+    border-color: #d98a8a;
+  }
+
+  .field-row{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .field-box{
+    border: 1px solid var(--border, #d1d5db);
+    border-radius: 10px;
+    padding: 12px 14px;
+    background: var(--background, #fff);
+  }
+
+  .field-box label{
+    display:block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    opacity: 0.6;
+    margin-bottom: 8px;
+  }
+
+  .date-range-inputs{
+    display:flex;
+    align-items:center;
+    gap: 8px;
+  }
+  .date-range-inputs input[type="date"]{
+    margin: 0;
+    flex: 1;
+    font-size: 0.85rem;
+    padding: 6px 8px;
+  }
+  .date-range-inputs span{
+    opacity: 0.5;
+    font-size: 0.82rem;
+  }
+
+  .budget-inputs{
+    display:flex;
+    align-items:center;
+    gap: 6px;
+  }
+  .budget-inputs select{
+    margin: 0;
+    width: auto;
+    font-size: 0.85rem;
+    padding: 6px 6px;
+  }
+  .budget-inputs input[type="number"]{
+    margin: 0;
+    flex: 1;
+    font-size: 0.85rem;
+    padding: 6px 8px;
+  }
+
+  /* ---------- Add section button ---------- */
+  #addSectionBtn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap: 10px;
+    width: 100%;
+    margin-top: 26px;
+    padding: 16px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    border: 1.5px dashed var(--border, #c7cad1);
+    border-radius: 14px;
+    background: none;
+    cursor: pointer;
+  }
+  #addSectionBtn:hover{
+    background: var(--background-alt, #f5f7f9);
+  }
+  #addSectionBtn .plus{
+    font-size: 1.3rem;
+    line-height: 1;
+    font-weight: 400;
+  }
+
+  @media (max-width: 560px){
+    .field-row{ grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <strong></strong>Yatraa
+</header>
+
+<h1 class="page-title">Build Itinerary</h1>
+<p class="page-sub">Break your trip into sections — flights, hotels, activities — and set a date range and budget for each.</p>
+
+<div id="sectionsWrap">
+
+  <div class="itinerary-section" data-section>
+    <div class="section-title-row">
+      <input class="section-name" type="text" value="Section 1: Flights" aria-label="Section name">
+    </div>
+    <p class="section-desc">All the necessary information about this section. This can be anything like a travel leg, hotel stay, or any other activity.</p>
+    <div class="field-row">
+      <div class="field-box">
+        <label>Date range</label>
+        <div class="date-range-inputs">
+          <input type="date" value="2024-01-04">
+          <span>to</span>
+          <input type="date" value="2024-01-05">
+        </div>
+      </div>
+      <div class="field-box">
+        <label>Budget for this section</label>
+        <div class="budget-inputs">
+          <select aria-label="Currency">
+            <option>USD</option><option>EUR</option><option>GBP</option><option>INR</option>
+          </select>
+          <input type="number" min="0" step="10" placeholder="0" value="450">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="itinerary-section" data-section>
+    <div class="section-title-row">
+      <input class="section-name" type="text" value="Section 2: Accommodation" aria-label="Section name">
+    </div>
+    <p class="section-desc">All the necessary information about this section. This can be anything like a travel leg, hotel stay, or any other activity.</p>
+    <div class="field-row">
+      <div class="field-box">
+        <label>Date range</label>
+        <div class="date-range-inputs">
+          <input type="date" value="2024-01-15">
+          <span>to</span>
+          <input type="date" value="2024-01-16">
+        </div>
+      </div>
+      <div class="field-box">
+        <label>Budget for this section</label>
+        <div class="budget-inputs">
+          <select aria-label="Currency">
+            <option>USD</option><option>EUR</option><option>GBP</option><option>INR</option>
+          </select>
+          <input type="number" min="0" step="10" placeholder="0" value="620">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="itinerary-section" data-section>
+    <div class="section-title-row">
+      <input class="section-name" type="text" value="Section 3: Activities" aria-label="Section name">
+    </div>
+    <p class="section-desc">All the necessary information about this section. This can be anything like a travel leg, hotel stay, or any other activity.</p>
+    <div class="field-row">
+      <div class="field-box">
+        <label>Date range</label>
+        <div class="date-range-inputs">
+          <input type="date" value="2024-01-16">
+          <span>to</span>
+          <input type="date" value="2024-01-21">
+        </div>
+      </div>
+      <div class="field-box">
+        <label>Budget for this section</label>
+        <div class="budget-inputs">
+          <select aria-label="Currency">
+            <option>USD</option><option>EUR</option><option>GBP</option><option>INR</option>
+          </select>
+          <input type="number" min="0" step="10" placeholder="0" value="300">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<button type="button" id="addSectionBtn">
+  <span class="plus">+</span> Add another section
+</button>
+
+<script>
+(function(){
+  const wrap = document.getElementById('sectionsWrap');
+  const addBtn = document.getElementById('addSectionBtn');
+  let count = wrap.querySelectorAll('[data-section]').length;
+
+  function renumber(){
+    wrap.querySelectorAll('[data-section]').forEach((sec, i) => {
+      const removeBtn = sec.querySelector('.remove-section-btn');
+      if(removeBtn) removeBtn.dataset.index = i + 1;
+    });
+  }
+
+  function addSection(){
+    count += 1;
+    const sec = document.createElement('div');
+    sec.className = 'itinerary-section';
+    sec.setAttribute('data-section', '');
+    sec.innerHTML = `
+      <div class="section-title-row">
+        <input class="section-name" type="text" value="Section ${count}: New section" aria-label="Section name">
+        <button type="button" class="remove-section-btn">Remove</button>
+      </div>
+      <p class="section-desc">All the necessary information about this section. This can be anything like a travel leg, hotel stay, or any other activity.</p>
+      <div class="field-row">
+        <div class="field-box">
+          <label>Date range</label>
+          <div class="date-range-inputs">
+            <input type="date">
+            <span>to</span>
+            <input type="date">
+          </div>
+        </div>
+        <div class="field-box">
+          <label>Budget for this section</label>
+          <div class="budget-inputs">
+            <select aria-label="Currency">
+              <option>USD</option><option>EUR</option><option>GBP</option><option>INR</option>
+            </select>
+            <input type="number" min="0" step="10" placeholder="0">
+          </div>
+        </div>
+      </div>
+    `;
+    wrap.appendChild(sec);
+    sec.querySelector('.remove-section-btn').addEventListener('click', () => {
+      sec.remove();
+    });
+    sec.querySelector('.section-name').focus();
+  }
+
+  addBtn.addEventListener('click', addSection);
+})();
+</script>
+
+</body>
+</html>
