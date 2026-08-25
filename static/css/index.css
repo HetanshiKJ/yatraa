@@ -57,3 +57,23 @@ main .section1{
     left: 0;
     z-index: 1;
 }   
+
+footer{
+    box-sizing: border-box;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    /* background-color: pink; */
+    justify-content: space-around;
+    padding: 10px;
+}
+footer nav{
+    display: flex;
+    flex-direction: column;
+    /* background-color: lightblue; */
+}
+footer .contact{
+    display: flex;
+    flex-direction: column;
+    /* background-color: lightslategray; */
+}
