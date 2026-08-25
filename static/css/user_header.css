@@ -1,0 +1,36 @@
+body, html{
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+}
+header{
+    width: 100vw;
+    padding:10px;
+    box-sizing: border-box;
+    /* background-color: pink; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgb(206, 205, 205);
+}
+header h1{
+    margin: 0px;
+    /* background-color: lightblue; */
+    padding: 10px 0px;
+}
+header nav{
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+    align-items: center;
+    justify-content: center;
+
+}
+
+header nav img{
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+}
+
