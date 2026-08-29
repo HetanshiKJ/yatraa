@@ -78,3 +78,9 @@
 .trip-section .section-heading a{
     margin-right: 10px;
 }
+.profile-container .delete-acc-btn{
+    background-color: rgb(244, 176, 176);
+}
+.profile-container button{
+    margin-top: 20px;
+}

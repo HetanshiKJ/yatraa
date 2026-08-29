@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yatraa</title>
+    <script src="../static/js/layout.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css">
+    <link rel="stylesheet" href="../static/css/global.css">
+    <link rel="stylesheet" href="../static/css/edit_profile.css">
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    <main>
+        <div class="profile-container">
+            <div class="profile-image-card">
+            <div class="avatar" id="profile-pic">
+                <img src="../static/images/profile-pic.jpg" alt="profile picture" srcset="">
+            </div>
+            <input type="file" id="profileImageInput" accept="image/*" style="display: none;"> 
+        </div>
+        <form id="profileForm">
+            <div class="pfield">
+                <label for="profileName">Name</label>
+                <input id="profileName" value="Aarav Sharma" required>
+            </div>
+          
+        
+            <div class="pfield">
+                <label for="profileEmail">Email</label>
+                <input id="profileEmail" type="email" value="aarav@example.com" required>
+            </div>
+          
+            <div class="pfield">
+                <label for="profileLanguage">Language</label>
+                <select id="profileLanguage">
+                    <option value="en">English</option>
+                    <option value="fr">French</option>
+                    <option value="es">Spanish</option>
+                </select>
+            </div>
+          
+
+            <div class="pfield">
+                <label for="profileCurrency">Currency</label>
+                <select id="profileCurrency">
+                    <option>INR</option>
+                    <option>USD</option>
+                    <option>EUR</option>
+                    <option>GBP</option>
+                </select>
+            </div>
+          
+
+            <div class="pfield">
+                <label for="profileTimezone">Timezone</label>
+                <select id="profileTimezone">
+                    <option value="Asia/Kolkata">India Standard Time (IST)</option>
+                </select>
+            </div>
+          
+
+          <div class="form-actions">
+            <button class="primary-btn" type="submit">Save Changes</button>
+            <button class="danger-btn" type="button" id="deleteAccount">Cancel</button>
+          </div>
+        </form>
+    </main>
+    <div id="footer-placeholder"></div>
+    <script>
+        const profilePic = document.getElementById('profile-pic');
+        const fileInput = document.getElementById('profileImageInput');
+
+        // When user clicks the profile picture, open the file dialog
+        profilePic.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        // When user selects a file, preview it or upload it
+        fileInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                // Show a preview of the new image immediately
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    profilePic.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+
+                // TODO: Upload the 'file' object to your server using FormData/AJAX
+            }
+        });
+
+    </script>
+</body>
+</html>
