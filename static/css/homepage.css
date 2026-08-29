@@ -1,0 +1,23 @@
+main{
+    /* background-color: yellow; */
+    width: 100vw;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+main .section1{
+    background-color: pink;
+}
+main .section1 .toolbar{
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 1fr;
+    width: 100%;
+    background-color: lightblue;
+}
+
+main .trip-group .trip-card{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+main .trip-group .trip-card .trip-name{
+    font-weight: 600;
+}

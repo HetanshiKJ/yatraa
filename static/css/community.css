@@ -40,6 +40,16 @@
     margin: 0px;
 }
 .community-controls{
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 1fr;
+    width: 100%;
+    padding: 10px 10px 0px 10px;
+}
+.community-content{
+    width: 100%;
+    margin: 0px;
+    /* background-color: yellow; */
+}
+main{
+    /* background: pink; */
 }

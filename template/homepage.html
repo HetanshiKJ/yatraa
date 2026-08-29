@@ -6,7 +6,9 @@
 <title>Yatraa</title>
 
 <!-- Water.css (light theme) -->
+ <link rel="stylesheet" href="../static/css/homepage.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css">
+<link rel="stylesheet" href="../static/css/global.css">
 <script src="../static/js/layout.js"></script>
 
 </head>
@@ -14,86 +16,93 @@
 
 <div id="header-placeholder"></div>
 
-<div class="welcome-row">
-  <h1 id="welcomeHeading">Welcome back, Yatri</h1>
-<p class="page-sub">All of your trips, in one place.</p>
-
-<div class="toolbar">
-  <input type="search" id="tripSearch" placeholder="Search trips…" aria-label="Search trips">
-  <button id="groupByBtn" type="button">Group by</button>
-  <button id="filterBtn" type="button">Filter</button>
-  <button id="sortByBtn" type="button">Sort by…</button>
-</div>
-
-<button type="button" class="create-trip-card"><span class="plus">+</span> Create new trip</button>
-
-<section class="trip-group">
-  <h2>Ongoing</h2>
-  <div class="trip-group-list">
-    <div class="trip-card">
-      <span class="trip-status-dot" style="background:#e39a3c"></span>
-      <div class="trip-body">
-        <div class="trip-name">Japan Adventure</div>
-        <div class="trip-meta">Tokyo &amp; Kyoto, Japan · Jan 16 – Jan 21, 2024</div>
-        <div class="trip-desc">Day 3 of 6 — today's plan: Fushimi Inari shrine hike, then izakaya-hopping in Gion.</div>
-        <div class="trip-progress"><div style="width:50%; background:#e39a3c"></div></div>
-      </div>
-      <div class="trip-side">
-        <span class="status-pill status-ongoing">Ongoing</span>
-        <button type="button" class="view-btn">View trip</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="trip-group">
-  <h2>Up-coming</h2>
-  <div class="trip-group-list">
-    <div class="trip-card">
-      <span class="trip-status-dot" style="background:#3d6fd6"></span>
-      <div class="trip-body">
-        <div class="trip-name">NYC Getaway</div>
-        <div class="trip-meta">New York City, USA · Jan 22 – Jan 23, 2024</div>
-        <div class="trip-desc">Starts in 5 days. Broadway tickets booked, hotel check-in confirmed for 3pm.</div>
-      </div>
-      <div class="trip-side">
-        <span class="status-pill status-upcoming">Upcoming</span>
-        <button type="button" class="view-btn">View trip</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="trip-group">
-  <h2>Completed</h2>
-  <div class="trip-group-list">
-    <div class="trip-card">
-      <span class="trip-status-dot" style="background:#3ba86b"></span>
-      <div class="trip-body">
-        <div class="trip-name">Paris Trip</div>
-        <div class="trip-meta">Paris, France · Jan 4 – Jan 5, 2024</div>
-        <div class="trip-desc">A quick weekend loop: Louvre, Montmartre, and dinner by the Seine.</div>
-      </div>
-      <div class="trip-side">
-        <span class="status-pill status-completed">Completed</span>
-        <button type="button" class="view-btn">View trip</button>
-      </div>
+<main>
+  <section class="section1">
+    <div class="welcome-row">
+      <h2 id="welcomeHeading">Welcome back, Yatri</h2>
+      <p class="page-sub">Plan all your trips, in one place.</p>
     </div>
 
-    <div class="trip-card">
-      <span class="trip-status-dot" style="background:#3ba86b"></span>
-      <div class="trip-body">
-        <div class="trip-name">Bali Escape</div>
-        <div class="trip-meta">Bali, Indonesia · Dec 10 – Dec 17, 2023</div>
-        <div class="trip-desc">Surf lessons in Canggu, sunrise trek up Mt. Batur, three days in Ubud.</div>
-      </div>
-      <div class="trip-side">
-        <span class="status-pill status-completed">Completed</span>
-        <button type="button" class="view-btn">View trip</button>
+    <div class="toolbar">
+      <input type="search" id="tripSearch" placeholder="Search trips…" aria-label="Search trips">
+      <button id="groupByBtn" type="button">Group by</button>
+      <button id="filterBtn" type="button">Filter</button>
+      <button id="sortByBtn" type="button">Sort by…</button>
+    </div>
+
+    <button type="button" class="create-trip-card"><span class="plus">+</span> Create new trip</button>
+  </section>
+  
+
+  <section class="trip-group">
+    <h2>Ongoing</h2>
+    <div class="trip-group-list">
+      <div class="trip-card">
+        <span class="trip-status-dot" style="background:#e39a3c"></span>
+        <div class="trip-body">
+          <div class="trip-name">Japan Adventure</div>
+          <div class="trip-meta">Tokyo &amp; Kyoto, Japan · Jan 16 – Jan 21, 2024</div>
+          <div class="trip-desc">Day 3 of 6 — today's plan: Fushimi Inari shrine hike, then izakaya-hopping in Gion.</div>
+          <div class="trip-progress"><div style="width:50%; background:#e39a3c"></div></div>
+        </div>
+        <div class="trip-side">
+          <span class="status-pill status-ongoing">Ongoing</span>
+          <button type="button" class="view-btn">View trip</button>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <section class="trip-group">
+    <h2>Up-coming</h2>
+    <div class="trip-group-list">
+      <div class="trip-card">
+        <span class="trip-status-dot" style="background:#3d6fd6"></span>
+        <div class="trip-body">
+          <div class="trip-name">NYC Getaway</div>
+          <div class="trip-meta">New York City, USA · Jan 22 – Jan 23, 2024</div>
+          <div class="trip-desc">Starts in 5 days. Broadway tickets booked, hotel check-in confirmed for 3pm.</div>
+        </div>
+        <div class="trip-side">
+          <span class="status-pill status-upcoming">Upcoming</span>
+          <button type="button" class="view-btn">View trip</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trip-group">
+    <h2>Completed</h2>
+    <div class="trip-group-list">
+      <div class="trip-card">
+        <span class="trip-status-dot" style="background:#3ba86b"></span>
+        <div class="trip-body">
+          <div class="trip-name">Paris Trip</div>
+          <div class="trip-meta">Paris, France · Jan 4 – Jan 5, 2024</div>
+          <div class="trip-desc">A quick weekend loop: Louvre, Montmartre, and dinner by the Seine.</div>
+        </div>
+        <div class="trip-side">
+          <span class="status-pill status-completed">Completed</span>
+          <button type="button" class="view-btn">View trip</button>
+        </div>
+      </div>
+
+      <div class="trip-card">
+        <span class="trip-status-dot" style="background:#3ba86b"></span>
+        <div class="trip-body">
+          <div class="trip-name">Bali Escape</div>
+          <div class="trip-meta">Bali, Indonesia · Dec 10 – Dec 17, 2023</div>
+          <div class="trip-desc">Surf lessons in Canggu, sunrise trek up Mt. Batur, three days in Ubud.</div>
+        </div>
+        <div class="trip-side">
+          <span class="status-pill status-completed">Completed</span>
+          <button type="button" class="view-btn">View trip</button>
+        </div>
+      </div>
+    </div>
+  </section>          
+</main>
+
 <div id="footer-placeholder"></div>
 <script>
 (function(){

@@ -1,0 +1,80 @@
+.profile-container{
+    padding: 15px 0px 0px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-container .avatar img{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+.profile-container .profile-details{
+    width: 500px;
+    text-align: center;
+}
+.profile-container .profile-details .details{
+    margin-bottom: 10px;
+    /* background-color: aqua; */
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    align-items: center;
+    height: 50px;
+    border: 1px solid rgb(167, 166, 166);
+    border-radius: 5px;
+    /* border: 1px solid grey; */
+    /* background-color: rgb(226, 226, 226) */
+    /* justify-content: center; */
+}
+.profile-container .profile-details .details .pfield{
+    display: flex;
+    /* background-color: violet; */
+    width: 100px;
+    margin: 0;
+    height: 100%;
+    align-items: center;
+    padding: 10px;
+}
+.profile-container .profile-details .details .pdata{
+    display: flex;
+    /* background-color: pink; */
+    /* width: 300px; */
+    margin: 0;
+    height: 100%;
+    align-items: center;
+    padding: 10px 10px 10px 20px;
+    border-left: 1px solid rgb(167, 166, 166);
+}
+.tripDetails{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* background-color: yellow; */
+    align-items: center;
+    background: whitesmoke;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.tripDetails button{
+    /* width: 200px; */
+    height: auto;
+    padding: 10px 20px  ;
+
+}
+.trip-section{
+    margin-bottom: 20px;
+}
+
+.trip-section .section-heading{
+    display: flex;
+    flex-direction: row;
+    /* background-color: lightblue; */
+    justify-content: space-between;
+    align-items: center;
+}
+.trip-section .section-heading a{
+    margin-right: 10px;
+}

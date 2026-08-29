@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Yatraa</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css">
-  <link rel="stylesheet" href="../static/css/style.css">
+  <link rel="stylesheet" href="../static/css/user_profile.css">
+  <link rel="stylesheet" href="../static/css/global.css">
+  <!-- <link rel="stylesheet" href="../static/css/style.css"> -->
   <script src="../static/js/layout.js"></script>
 </head>
 <body>
@@ -14,24 +16,21 @@
 
 <main>
   <section class="screen">
-    <div class="page-title">
-      <div>
-        <h1>User Profile</h1>
-        <p>Manage your profile and explore trips across India.</p>
-      </div>
-      <button onclick="location.href='screen8.html'">Explore Indian Destinations →</button>
-    </div>
+    
 
     <div class="profile-container">
       <div class="profile-image-card">
-        <div class="avatar" id="profileAvatar">JD</div>
+        <div class="avatar" id="profileAvatar">
+          <img src="../static/images/profile-pic.jpg" alt="profile picture" srcset="">
+        </div>
         <!-- <input type="file" id="profileImageInput" accept="image/*"> -->
+         
       </div>
 
       <div class="profile-details">
         <h2>User Details</h2>
 
-        <form id="profileForm">
+        <!-- <form id="profileForm">
           <label for="profileName">Name</label>
           <input id="profileName" value="Aarav Sharma" required>
 
@@ -62,7 +61,35 @@
             <button class="primary-btn" type="submit">Save Changes</button>
             <button class="danger-btn" type="button" id="deleteAccount">Delete Account</button>
           </div>
-        </form>
+        </form> -->
+        <div class="details">
+          <h3 class="pfield">Name</h3>
+          <p class="pdata">Username</p>
+        </div>
+        <div class="details">
+          <h3 class="pfield">Email</h3>
+          <p class="pdata">example@email.com</p>
+        </div>
+        <div class="details">
+          <h3 class="pfield">Language</h3>
+          <p class="pdata">English(US)</p>
+        </div>
+        <div class="details">
+          <h3 class="pfield">Country</h3>
+          <p class="pdata">India</p>
+        </div>
+        <div class="details">
+          <h3 class="pfield">Currency</h3>
+          <p class="pdata">INR</p>
+        </div>
+        <div class="details">
+          <h3 class="pfield">Timezone</h3>
+          <p class="pdata">IST</p>
+        </div>
+        <button class="mytrips">Edit Profile</button>
+        <button class="mytrips">Logout</button>
+        <button class="mytrips">Delete Account</button>
+        
 
         <p id="profileMessage" class="success-message"></p>
       </div>
@@ -70,24 +97,78 @@
 
     <section class="trip-section">
       <div class="section-heading">
-        <h2>Preplanned Trips</h2>
-        <button onclick="location.href='screen9.html'">View Itinerary</button>
+        <h2>Ongoing Trips</h2>
+        <a href="#">Veiw all trips</a>
       </div>
-      <div class="trip-grid" id="preplannedTrips"></div>
+      <div class="trip-grid" id="previousTrips">
+        <div class="tripDetails">
+          <div class="trip-name">
+            <h4>Rajasthan Exploration</h4>
+            <p class="trip-desc">This is a description for this trip.</p>
+          </div>
+          <button>View Itinerary</button>
+        </div>
+        <div class="tripDetails">
+          <div class="trip-name">
+            <h4>Rajasthan Exploration</h4>
+            <p class="trip-desc">This is a description for this trip.</p>
+          </div>
+          <button>View Itinerary</button>
+        </div>
+    
+      </div>
+      <div class="section-heading">
+        <h2>Preplanned Trips</h2>
+        <a href="#">Veiw all trips</a>
+      </div>
+      <div class="trip-grid" id="preplannedTrips">
+      <div class="tripDetails">
+          <div class="trip-name">
+            <h4>Rajasthan Exploration</h4>
+            <p class="trip-desc">This is a description for this trip.</p>
+          </div>
+          <button>View Itinerary</button>
+        </div>
+        <div class="tripDetails">
+          <div class="trip-name">
+            <h4>Rajasthan Exploration</h4>
+            <p class="trip-desc">This is a description for this trip.</p>
+          </div>
+          <button>View Itinerary</button>
+        </div>
+        
+      </div>
     </section>
 
     <section class="trip-section">
       <div class="section-heading">
         <h2>Previous Trips</h2>
+        <a href="#">Veiw all trips</a>
       </div>
-      <div class="trip-grid" id="previousTrips"></div>
+      <div class="trip-grid" id="previousTrips">
+        <div class="tripDetails">
+          <div class="trip-name">
+            <h4>Rajasthan Exploration</h4>
+            <p class="trip-desc">This is a description for this trip.</p>
+          </div>
+          <button>View Itinerary</button>
+        </div>
+        <div class="tripDetails">
+          <div class="trip-name">
+            <h4>Rajasthan Exploration</h4>
+            <p class="trip-desc">This is a description for this trip.</p>
+          </div>
+          <button>View Itinerary</button>
+        </div>
+    
+      </div>
     </section>
   </section>
 </main>
 
 <div id="footer-placeholder"></div>
 
-<script src="data.js"></script>
-<script src="screen7.js"></script>
+<script src="../static/js/data.js"></script>
+<script src="../static/js/user_profile.js"></script>
 </body>
 </html>
