@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yatraa · Build Itinerary</title>
+
+<!-- Water.css (light theme) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css">
+<link rel="stylesheet" href="../static/css/global.css">
+<link rel="stylesheet" href="../static/css/build_edit_itinerary.css">
+<script src="../static/js/layout.js"></script>
+
+</head>
+<body>
+
+<div id="header-placeholder"></div>
+
+<main>
+
+  <div class="trip-summary">
+    <div>
+      <h1 id="tripTitleDisplay">Japan Adventure</h1>
+      <div class="trip-meta" id="tripMetaDisplay">Tokyo &amp; Kyoto, Japan · Jan 16 – Jan 21, 2024</div>
+    </div>
+    <a href="new-trip.html" class="edit-details-link">Edit trip details</a>
+  </div>
+
+  <div class="budget-card">
+    <div class="budget-top">
+      <span class="budget-label">Trip budget</span>
+      <div class="budget-input-row">
+        <select id="budgetCurrency">
+          <option>USD</option><option>EUR</option><option>GBP</option><option>INR</option><option>JPY</option>
+        </select>
+        <input type="number" id="budgetTotal" min="0" step="10" value="2000">
+      </div>
+    </div>
+    <div class="budget-track" id="budgetTrack"><div id="budgetTrackFill" style="width:0%"></div></div>
+    <p class="budget-summary-text" id="budgetSummaryText">$0 spent of $2000</p>
+  </div>
+
+  <div class="day-tabs" id="dayTabs"></div>
+
+  <div id="dayPanels"></div>
+
+  <div class="save-bar">
+    <button onclick="window.location.href='../template/homepage.html'" class="white-btn">Cancel</button>
+    <button type="button" id="saveItineraryBtn">Save itinerary</button>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="../static/js/build_edit_itinerary.js"></script>
+
+</body>
+</html>

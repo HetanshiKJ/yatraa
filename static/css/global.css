@@ -17,3 +17,27 @@ section{
     padding:0px 10px;
     box-sizing: border-box;
 }
+
+.white-btn{
+  background-color: white;
+  border: 1px solid rgb(207, 206, 206);
+}
+.white-btn:hover{
+    background-color:rgb(207, 206, 206) ;
+}
+.blue-btn{
+  background-color: #439ADD;
+  border: 1px solid #439ADD;
+  color: white;
+}
+.blue-btn:hover{
+  color: #439ADD;
+  border: 1px solid #439ADD;
+  background-color: white;
+}
+.active-page{
+  /* background-color: rgb(226, 235, 248);
+  padding: 10px;
+  border-radius: 5px; */
+  text-decoration: underline;
+}

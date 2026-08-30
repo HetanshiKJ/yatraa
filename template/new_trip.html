@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yatraa · New Trip</title>
+
+<!-- Water.css (light theme) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css">
+<link rel="stylesheet" href="../static/css/new_trip.css">
+<link rel="stylesheet" href="../static/css/global.css">
+
+<script src="../static/js/layout.js"></script>
+</head>
+<body>
+
+<div id="header-placeholder"></div>
+
+<main>
+  <h2 class="page-title">Plan a new trip</h2>
+  <p class="page-sub">Give it a name and rough dates to start — you can flesh out the itinerary section by section afterward.</p>
+
+  <div class="form-card">
+    <form id="newTripForm" novalidate>
+
+      <div class="field" id="titleField">
+        <label for="tripTitle">Trip title</label>
+        <input type="text" id="tripTitle" name="title" placeholder="e.g. Japan Adventure" maxlength="80" required>
+        <p class="field-error" id="titleError">Give your trip a title so you can find it later.</p>
+      </div>
+
+      <div class="field" id="destinationField">
+        <label for="tripDestination">Destination</label>
+        <input type="text" id="tripDestination" name="destination" placeholder="e.g. Tokyo & Kyoto, Japan" maxlength="100" required>
+        <p class="field-error" id="destinationError">Add a destination so trips are easy to tell apart.</p>
+      </div>
+
+      <div class="field" id="descField">
+        <label for="tripDesc">Description</label>
+        <textarea id="tripDesc" name="description" maxlength="280" placeholder="What's this trip about? Who's coming, what's the vibe, anything you want to remember later."></textarea>
+        <div class="char-count" id="descCount">0 / 280</div>
+      </div>
+
+      <div class="field" id="typeMembersField">
+        <div class="date-row">
+          <div>
+            <label for="tripType">Trip type</label>
+            <select id="tripType" name="tripType">
+              <option value="Solo">Solo</option>
+              <option value="Couple">Couple</option>
+              <option value="Family">Family</option>
+              <option value="Friends">Friends</option>
+              <option value="Business">Business</option>
+              <option value="Adventure">Adventure</option>
+              <option value="Relaxation">Relaxation</option>
+            </select>
+          </div>
+          <div>
+            <label for="memberCount">Number of members</label>
+            <input type="number" id="memberCount" name="memberCount" min="1" max="50" step="1" value="1" inputmode="numeric">
+          </div>
+        </div>
+      </div>
+
+      <div class="field" id="datesField">
+        <label>Trip dates</label>
+        <div class="date-row">
+          <div>
+            <input type="date" id="startDate" name="startDate" required>
+            <p class="hint">Start date</p>
+          </div>
+          <div>
+            <input type="date" id="endDate" name="endDate" required>
+            <p class="hint">End date</p>
+          </div>
+        </div>
+        <p class="field-error" id="datesError">Pick a start and end date, with the end on or after the start.</p>
+      </div>
+
+      <div class="form-actions">
+        <button class="blue-btn" type="submit">Create trip</button>
+        <a href="homepage.html" class="btn btn-secondary">Cancel</a>
+      </div>
+    </form>
+  </div>
+</main>
+
+
+<script>
+(function(){
+  const form = document.getElementById('newTripForm');
+  const titleInput = document.getElementById('tripTitle');
+  const destinationInput = document.getElementById('tripDestination');
+  const descInput = document.getElementById('tripDesc');
+  const descCount = document.getElementById('descCount');
+  const tripTypeInput = document.getElementById('tripType');
+  const memberCountInput = document.getElementById('memberCount');
+  const startInput = document.getElementById('startDate');
+  const endInput = document.getElementById('endDate');
+
+  descInput.addEventListener('input', () => {
+    const len = descInput.value.length;
+    descCount.textContent = `${len} / 280`;
+    descCount.classList.toggle('near-limit', len >= 260);
+  });
+
+  function clearError(fieldId){
+    const field = document.getElementById(fieldId);
+    field.classList.remove('has-error');
+    const err = field.querySelector('.field-error');
+    if(err) err.classList.remove('visible');
+  }
+
+  function showError(fieldId){
+    const field = document.getElementById(fieldId);
+    field.classList.add('has-error');
+    const err = field.querySelector('.field-error');
+    if(err) err.classList.add('visible');
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let valid = true;
+
+    clearError('titleField');
+    clearError('destinationField');
+    clearError('datesField');
+
+    if(titleInput.value.trim() === ''){
+      showError('titleField');
+      valid = false;
+    }
+
+    if(destinationInput.value.trim() === ''){
+      showError('destinationField');
+      valid = false;
+    }
+
+    const start = startInput.value;
+    const end = endInput.value;
+    if(!start || !end || end < start){
+      showError('datesField');
+      valid = false;
+    }
+
+    if(!valid) return;
+
+    // No backend here — hand the new trip off to the homepage via URL params
+    // so it's visible right away. Replace with a real API call when ready.
+    const qs = new URLSearchParams({
+      newTitle: titleInput.value.trim(),
+      newDestination: destinationInput.value.trim(),
+      newDesc: descInput.value.trim(),
+      newType: tripTypeInput.value,
+      newMembers: memberCountInput.value,
+      newStart: start,
+      newEnd: end
+    });
+    window.location.href = `homepage.html?${qs.toString()}`;
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -1,3 +1,10 @@
+main{
+    padding: 0px 150px;
+}
+.title{
+    text-align: center;
+}
+
 .community-post{
     background-color: whitesmoke;
     padding: 20px;

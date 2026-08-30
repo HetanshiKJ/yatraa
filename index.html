@@ -6,28 +6,94 @@
     <title>Yatraa</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css">
     <link rel="stylesheet" href="./static/css/index.css">
+    <link
+  href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css"
+  rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/global.css">
 </head>
 <body>
 <header>
     <h1>Yatraa</h1>
     <nav>
-        <a href="#">About Us</a>
-        <a href="#">Explore</a>
-        <a href="#">Community</a>
-        <a href="#">Contact Us</a>
-        <button>Login</button>
+        <a href="./template/about_us.html">About Us</a>
+        <a href="./template/explore.html">Explore</a>
+        <a href="./template/community.html">Community</a>
+        <a href="#footer">Contact Us</a>
+        <button class="blue-btn">Login</button>
     </nav>
 </header>
 <main>
     <section class="section1">
         <div class="gradient"></div>
+        <div class="tagline-container">
+        <h1 class="s1-tagline">
+            Plan <em>less</em> and enjoy <em>more</em> <br>
+            only with Yatraa.
+        </h1>
+        <button class="blue-btn" type="button" data-goto="auth" data-mode="register">Get started — it's free</button>
+        <button class="white-btn">Explore destinations</button>
+    </div>
     </section>
     <section class="section2">
-
+        <h2>About Us</h2>
+    <!-- <p>Using Yatraa build itineraries by section, track budgets, and see all your ongoing, upcoming, and completed trips at a glance — Yatraa keeps your travel plans organized from first idea to final day.</p> -->
+     <p>
+        Yatraa was built on a simple idea: planning a trip should feel as good as taking one. We were tired of juggling spreadsheets, sticky notes, and a dozen browser tabs every time we booked a flight — so we built one home for every itinerary, budget, and memory.
+     </p>
     </section>
-
+    <section class="section3">
+        <h3>What you get</h3>
+        <p>With Yatraa you can plan your entire trip, all in one place.</p>
+        <div class="feature-grid">
+            <div class="feature-card">
+            <div class="icon"><i class="ri-earth-fill"></i></div>
+            <h3>Section-by-section planning</h3>
+            <p>Split trips into flights, stays, and activities, each with its own dates and budget.</p>
+            </div>
+            <div class="feature-card">
+            <div class="icon"><i class="ri-calendar-2-fill"></i></div>
+            <h3>Calendar view</h3>
+            <p>See every trip laid out on a monthly calendar so nothing overlaps by accident.</p>
+            </div>
+            <div class="feature-card">
+            <div class="icon"><i class="ri-bar-chart-box-fill"></i></div>
+            <h3>Trends &amp; budgets</h3>
+            <p>Track spending and see where your travel time actually goes, trip after trip.</p>
+            </div>
+        </div>
+    </section>
+    <section class="section4">
+        <h2>Explore destinations</h2>
+        <div class="destination-grid">
+            <div class="destination-card">
+                <img src="./static/images/france.jpg" alt="paris">
+                <h2>Paris</h2>
+            </div>
+            <div class="destination-card">
+                <img src="./static/images/japan.jpg" alt="paris">
+                <h2>Japan</h2>
+            </div>
+            <div class="destination-card">
+                <img src="./static/images/hawaii.jpg" alt="paris">
+                <h2>Hawaii</h2>
+            </div>
+            <div class="destination-card">
+                <img src="./static/images/nyc.jpg" alt="paris">
+                <h2>New York</h2>
+            </div>
+        </div>
+    </section>
+    <section class="section5">
+        <h2>
+            Stop planning. Start packing.
+        </h2>
+        <p>
+            Yatraa keeps every flight, stay, and activity in one place — so the only thing left to do is go.
+        </p>
+        <button class="blue-btn">Plan your next trip today!</button>
+    </section>
 </main> 
-<footer>
+<footer id="footer">
     <section class="branding">
         <h2>Yatraa</h2>
         <p class="tagline">Less time planning, more time enjoying.</p>
@@ -35,9 +101,9 @@
     
     <nav>
         <h3>Important Links</h3>
-        <a href="./template/aboutus,html">About Us</a>
-        <a href="./template/explore.html">Explore</a>
-        <a href="./template/community.html">Community</a>
+        <a href="../template/about_us.html">About Us</a>
+        <a href="../template/explore.html">Explore</a>
+        <a href="../template/community.html">Community</a>
     </nav>
 
     <section class="contact">

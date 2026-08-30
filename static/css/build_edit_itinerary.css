@@ -1,0 +1,232 @@
+main{
+    padding: 10px 150px;
+}
+
+  /* ---------- Trip summary header ---------- */
+  .trip-summary{
+    border: 1px solid var(--border, #d1d5db);
+    border-radius: 14px;
+    padding: 22px 24px;
+    background: var(--background-alt, #f5f7f9);
+    margin-bottom: 26px;
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .trip-summary h1{ margin: 0 0 4px; font-size: 1.5rem; }
+  .trip-summary .trip-meta{ opacity: 0.65; font-size: 0.9rem; }
+  .trip-summary .edit-details-link{ font-size: 0.82rem; white-space: nowrap; }
+
+  /* ---------- Budget bar ---------- */
+  .budget-card{
+    border: 1px solid var(--border, #d1d5db);
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-bottom: 30px;
+  }
+  .budget-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .budget-top .budget-label{ font-weight: 700; font-size: 0.95rem; }
+  .budget-input-row{
+    display:flex;
+    align-items:center;
+    gap: 8px;
+  }
+  .budget-input-row select,
+  .budget-input-row input{
+    margin: 0;
+    width: auto;
+  }
+  .budget-input-row input{ width: 120px; }
+  .budget-summary-text{ font-size: 0.85rem; opacity: 0.75; }
+  .budget-summary-text strong{ opacity: 1; }
+  .budget-track{
+    width: 100%;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--border, #e2e5e9);
+    overflow: hidden;
+  }
+  .budget-track > div{
+    height: 100%;
+    border-radius: 999px;
+    background: #3ba86b;
+    transition: width 0.2s ease, background 0.2s ease;
+  }
+  .budget-track.warn > div{ background: #e39a3c; }
+  .budget-track.over > div{ background: #c0475a; }
+
+  /* ---------- Day tabs ---------- */
+  .day-tabs{
+    display:flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    margin-bottom: 22px;
+  }
+  .day-tabs button{
+    margin: 0;
+    white-space: nowrap;
+    background: none;
+    border: 1px solid var(--border, #d1d5db);
+    padding: 9px 16px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+  .day-tabs button[aria-selected="true"]{
+    background: var(--text-bright, #1b1d24);
+    color: var(--background, #fff);
+    border-color: var(--text-bright, #1b1d24);
+  }
+
+  /* ---------- Item cards ---------- */
+  .day-panel{ margin-bottom: 20px; }
+
+  .item-list{ display:flex; flex-direction: column; gap: 14px; margin-bottom: 18px; }
+
+  .item-card{
+    display:flex;
+    gap: 16px;
+    border: 1px solid var(--border, #d1d5db);
+    border-radius: 12px;
+    padding: 16px 18px;
+    background: var(--background-alt, #f5f7f9);
+  }
+  .item-card .item-icon{
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--background, #fff);
+    border: 1px solid var(--border, #d1d5db);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .item-card .item-body{ flex: 1; min-width: 0; }
+  .item-card .item-top-row{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .item-card .item-title{ font-weight: 700; font-size: 1rem; }
+  .item-card .item-time{ font-size: 0.8rem; opacity: 0.6; white-space: nowrap; }
+  .item-card .item-location{ font-size: 0.85rem; opacity: 0.7; margin-top: 2px; }
+  .item-card .item-notes{ font-size: 0.85rem; margin-top: 8px; }
+  .item-card .item-footer-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+  .item-card .item-cost{ font-size: 0.85rem; font-weight: 700; }
+  .item-card .item-confirmation a{ font-size: 0.8rem; }
+  .item-card .item-actions{ display:flex; gap: 8px; }
+  .item-card .item-actions button{
+    margin: 0;
+    background: none;
+    border: 1px solid var(--border, #d1d5db);
+    padding: 4px 11px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    cursor: pointer;
+  }
+  .item-card .item-actions button.danger:hover{ background: #fbdada; border-color: #d98a8a; }
+
+  .empty-day{
+    font-size: 0.88rem;
+    opacity: 0.55;
+    border: 1.5px dashed var(--border, #c7cad1);
+    border-radius: 12px;
+    padding: 22px;
+    text-align:center;
+    margin-bottom: 18px;
+  }
+
+  /* ---------- Add item form ---------- */
+  .add-item-toggle{
+    width: 100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap: 8px;
+    padding: 13px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    border: 1.5px dashed var(--border, #c7cad1);
+    border-radius: 12px;
+    background: none;
+    cursor: pointer;
+  }
+  .add-item-toggle:hover{ background: var(--background-alt, #f5f7f9); }
+  .add-item-toggle .plus{ font-size: 1.15rem; line-height:1; font-weight:400; }
+
+  .add-item-form{
+    border: 1px solid var(--border, #d1d5db);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 18px;
+  }
+  .add-item-form h3{ margin: 0 0 16px; font-size: 0.98rem; }
+  .form-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+  .form-grid .full{ grid-column: 1 / -1; }
+  .add-item-form label{
+    display:block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+  .add-item-form input,
+  .add-item-form select,
+  .add-item-form textarea{
+    width: 100%;
+    margin: 0;
+    font-family: inherit;
+    font-size: 0.9rem;
+  }
+  .add-item-form textarea{ min-height: 70px; resize: vertical; }
+  .cost-row{ display:flex; gap: 8px; }
+  .cost-row select{ width: 90px; flex-shrink:0; }
+  .add-item-form .form-actions{ display:flex; gap: 10px; margin-top: 4px; }
+  .add-item-form .form-actions button{ margin: 0; padding: 10px 20px; border-radius: 8px; }
+  .add-item-form .btn-secondary{ background:none; border: 1px solid var(--border, #d1d5db); color: inherit; }
+  .btn-secondary{
+    padding: 10px;
+  }
+
+  /* ---------- Save bar ---------- */
+  .save-bar{
+    display:flex;
+    justify-content:flex-end;
+    gap: 12px;
+    margin-top: 34px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border, #d1d5db);
+  }
+  .save-bar button{ margin: 0; padding: 12px 26px; border-radius: 8px; }
+  .save-bar .btn-secondary{ background:none; border: 1px solid var(--border, #d1d5db); color: inherit; text-decoration:none; display:inline-flex; align-items:center; }
+
+  @media (max-width: 560px){
+    .form-grid{ grid-template-columns: 1fr; }
+    .cost-row{ flex-direction: column; }
+    .cost-row select{ width: 100%; }
+  }

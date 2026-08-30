@@ -4,35 +4,31 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Yatraa</title>
-
-<!-- Water.css (light theme) -->
- <link rel="stylesheet" href="../static/css/homepage.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css">
 <link rel="stylesheet" href="../static/css/global.css">
-<script src="../static/js/layout.js"></script>
+<link rel="stylesheet" href="../static/css/homepage.css">
 
+<script src="../static/js/layout.js"></script>
 </head>
 <body>
 
 <div id="header-placeholder"></div>
 
 <main>
-  <section class="section1">
-    <div class="welcome-row">
-      <h2 id="welcomeHeading">Welcome back, Yatri</h2>
-      <p class="page-sub">Plan all your trips, in one place.</p>
-    </div>
+  <div class="welcome-row">
+    <h1 id="welcomeHeading">Welcome back, Yatri</h1>
+    <p class="page-sub">All of your trips, in one place.</p>
+  </div>
 
-    <div class="toolbar">
-      <input type="search" id="tripSearch" placeholder="Search trips…" aria-label="Search trips">
-      <button id="groupByBtn" type="button">Group by</button>
-      <button id="filterBtn" type="button">Filter</button>
-      <button id="sortByBtn" type="button">Sort by…</button>
-    </div>
 
-    <button type="button" class="create-trip-card"><span class="plus">+</span> Create new trip</button>
-  </section>
-  
+  <div class="toolbar">
+    <input type="search" id="tripSearch" placeholder="Search trips…" aria-label="Search trips">
+    <button id="groupByBtn" type="button">Group by</button>
+    <button id="filterBtn" type="button">Filter</button>
+    <button id="sortByBtn" type="button">Sort by…</button>
+  </div>
+
+  <button type="button" onclick="window.location.href='../template/new_trip.html'" class="create-trip-card"><span class="plus">+</span> Create new trip</button>
 
   <section class="trip-group">
     <h2>Ongoing</h2>
@@ -100,10 +96,11 @@
         </div>
       </div>
     </div>
-  </section>          
+  </section>
 </main>
 
 <div id="footer-placeholder"></div>
+
 <script>
 (function(){
   // If arriving from the landing/auth page with ?name=..., personalize the greeting
