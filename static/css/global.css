@@ -19,6 +19,7 @@ section{
 }
 
 .white-btn{
+  color: black;
   background-color: white;
   border: 1px solid rgb(207, 206, 206);
 }

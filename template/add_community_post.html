@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yatraa — Create Community Post</title>
+
+  <!-- Water.css -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+  <link rel="stylesheet" href="../static/css/global.css">
+  <link rel="stylesheet" href="../static/css/add_community_post.css">
+  <script src="../static/js/layout.js"></script>
+</head>
+<body>
+ <div id="header-placeholder"></div>
+
+  <main class="page-container">
+    <section class="page-heading">
+      <h1>Share your trip</h1>
+      <p class="subtitle">
+        Tell the Yatraa community about your journey, favorite places, and what made the trip memorable.
+      </p>
+    </section>
+
+    <section class="form-card" aria-labelledby="form-title">
+      <div class="form-card-header">
+        <div>
+          <h2 id="form-title">Create a community post</h2>
+          <p>Your post will be public and visible to other travelers.</p>
+        </div>
+        <span class="public-badge">Public post</span>
+      </div>
+
+      <form id="communityPostForm">
+        <div class="field-grid">
+          <div class="field">
+            <label for="tripName">Trip name <span class="required">*</span></label>
+            <input
+              id="tripName"
+              name="tripName"
+              type="text"
+              placeholder="e.g. Japan Adventure"
+              maxlength="100"
+              required
+            >
+          </div>
+
+          <div class="field">
+            <label for="destination">Trip destination <span class="required">*</span></label>
+            <input
+              id="destination"
+              name="destination"
+              type="text"
+              placeholder="e.g. Tokyo, Kyoto, Japan"
+              maxlength="120"
+              required
+            >
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="postText">Text post <span class="required">*</span></label>
+          <textarea
+            id="postText"
+            name="postText"
+            rows="7"
+            maxlength="1200"
+            placeholder="Share your experience, recommendations, highlights, or tips for other travelers..."
+            required
+          ></textarea>
+          <div class="field-meta">
+            <small>Write a helpful review or story about your trip.</small>
+            <small id="characterCount">0 / 1200</small>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="itineraryLink">
+            Link to your itinerary
+            <span class="optional">Optional</span>
+          </label>
+          <input
+            id="itineraryLink"
+            name="itineraryLink"
+            type="url"
+            placeholder="https://yatraa.example/trips/japan-adventure"
+          >
+          <small>Give the community a way to view your full itinerary if you want to share it.</small>
+        </div>
+
+        <fieldset class="rating-field">
+          <legend>Rating for this trip <span class="required">*</span></legend>
+          <p class="rating-help">How would you rate the overall trip?</p>
+
+          <div class="star-rating" role="radiogroup" aria-label="Trip rating">
+            <input type="radio" id="star5" name="rating" value="5" required>
+            <label for="star5" title="5 out of 5">★</label>
+
+            <input type="radio" id="star4" name="rating" value="4">
+            <label for="star4" title="4 out of 5">★</label>
+
+            <input type="radio" id="star3" name="rating" value="3">
+            <label for="star3" title="3 out of 5">★</label>
+
+            <input type="radio" id="star2" name="rating" value="2">
+            <label for="star2" title="2 out of 5">★</label>
+
+            <input type="radio" id="star1" name="rating" value="1">
+            <label for="star1" title="1 out of 5">★</label>
+          </div>
+
+          <output id="ratingOutput" class="rating-output">Select a rating</output>
+        </fieldset>
+
+        <div id="formMessage" class="form-message" role="status" aria-live="polite"></div>
+
+        <div class="form-actions">
+          <button  onclick="window.location.href='../template/community.html'" class="white-btn">Cancel</button>
+          <button type="submit" class="blue-btn">Publish post</button>
+        </div>
+      </form>
+    </section>
+
+    <aside class="posting-note">
+      <strong>A quick note</strong>
+      <span>Keep reviews useful and respectful. Your post will be shared publicly with the Yatraa community.</span>
+    </aside>
+  </main>
+
+  <div id="footer-placeholder"></div>
+  <script src="script.js"></script>
+</body>
+</html>

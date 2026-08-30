@@ -57,6 +57,8 @@ main{
     margin: 0px;
     /* background-color: yellow; */
 }
-main{
-    /* background: pink; */
+.add-post-btn{
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 20px;
 }
