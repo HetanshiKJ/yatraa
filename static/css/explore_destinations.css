@@ -1,0 +1,195 @@
+main{
+  padding: 0px 150px;
+}
+.welcome-header {
+  margin-top: 30px;
+  margin-bottom: 25px;
+}
+
+.welcome-header h1 {
+  margin: 0;
+  font-size: 1.8rem;  
+}
+
+.subtitle {
+  color: #666;
+  margin-top: 5px;
+  font-size: 0.95rem;
+}
+
+/* Search Toolbar */
+.toolbar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.toolbar input[type="text"] {
+  flex: 1;
+  background-color: #f1f3f5;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin: 0;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-action {
+  background-color: #e9ecef;
+  color: #333;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  cursor: pointer;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Filter Tag Pills */
+.tags-container {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.tag-pill {
+  background-color: #f1f3f5;
+  color: #495057;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.tag-pill.active {
+  background-color: #333;
+  color: #fff;
+}
+
+/* Section Title */
+.trip-section {
+  margin-bottom: 30px;
+}
+
+.section-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #666;
+  display: block;
+  margin-bottom: 12px;
+}
+
+/* Card Styling */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 10px;
+  padding: 18px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.card-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.meta-info {
+  font-size: 0.85rem;
+  color: #6c757d;
+  margin: 4px 0 10px 0;
+}
+
+.snippet {
+  font-size: 0.9rem;
+  color: #495057;
+  margin-bottom: 16px;
+}
+
+/* Badges */
+.badge {
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.badge-featured { background-color: #fff3bf; color: #f59f00; }
+.badge-popular { background-color: #e7f5ff; color: #1c7ed6; }
+.badge-community { background-color: #ebfbee; color: #37b24d; }
+
+/* Card Footer */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.author {
+  font-size: 0.8rem;
+  color: #868e96;
+}
+
+.btn-view {
+  background-color: #ced4da;
+  color: #333;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  margin: 0;
+}
+
+.btn-view:hover {
+  background-color: #adb5bd;
+}
+
+/* Footer Section */
+footer {
+  margin-top: 50px;
+  padding-top: 30px;
+  padding-bottom: 40px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 20px;
+}
+
+.footer-brand h2 { margin: 0 0 8px 0; }
+.footer-brand p { color: #666; font-size: 0.9rem; margin: 0; }
+
+.footer-heading {
+  font-weight: bold;
+  font-size: 0.95rem;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.footer-links a, .footer-contact a {
+  display: block;
+  color: #0066cc;
+  text-decoration: none;
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+}
