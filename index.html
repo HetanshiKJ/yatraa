@@ -16,10 +16,10 @@
     <h1>Yatraa</h1>
     <nav>
         <a href="./template/about_us.html">About Us</a>
-        <a href="./template/explore.html">Explore</a>
+        <a href="./template/explore_destinations.html">Explore</a>
         <a href="./template/community.html">Community</a>
         <a href="#footer">Contact Us</a>
-        <button class="blue-btn">Login</button>
+        <button class="blue-btn" onclick="window.location.href='../template/auth.html'">Login</button>
     </nav>
 </header>
 <main>
@@ -30,8 +30,8 @@
             Plan <em>less</em> and enjoy <em>more</em> <br>
             only with Yatraa.
         </h1>
-        <button class="blue-btn" type="button" data-goto="auth" data-mode="register">Get started — it's free</button>
-        <button class="white-btn">Explore destinations</button>
+        <button class="blue-btn" type="button" data-goto="auth" data-mode="register" onclick="window.location.href='../template/auth.html'">Get started — it's free</button>
+        <button class="white-btn" onclick="window.location.href='../template/explore_destinations.html'">Explore destinations</button>
     </div>
     </section>
     <section class="section2">
@@ -90,7 +90,7 @@
         <p>
             Yatraa keeps every flight, stay, and activity in one place — so the only thing left to do is go.
         </p>
-        <button class="blue-btn">Plan your next trip today!</button>
+        <button onclick="window.location.href='../template/auth.html'" class="blue-btn">Plan your next trip today!</button>
     </section>
 </main> 
 <footer id="footer">

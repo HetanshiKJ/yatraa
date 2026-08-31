@@ -32,9 +32,7 @@ section{
   color: white;
 }
 .blue-btn:hover{
-  color: #439ADD;
-  border: 1px solid #439ADD;
-  background-color: white;
+  background-color: #357eb6;
 }
 .active-page{
   /* background-color: rgb(226, 235, 248);

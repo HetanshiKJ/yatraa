@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yatraa</title>
+
+<!-- Water.css (light theme) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css">
+<link rel="stylesheet" href="../static/css/global.css">
+<link rel="stylesheet" href="../static/css/auth.css">
+</head>
+<body>
+<main>
+  <a class="back-link" href="../index.html">&larr; Back</a>
+
+  
+<div class="auth-card">
+  <div class="auth-tabs" role="tablist">
+    <button type="button" role="tab" data-tab="login" aria-selected="true">Log in</button>
+    <button type="button" role="tab" data-tab="register" aria-selected="false">Register</button>
+  </div>
+
+  <!-- Login form -->
+  <form id="loginForm" data-auth-panel="login" novalidate>
+    <h2>Welcome back</h2>
+
+    <div class="field" id="loginEmailField">
+      <label for="loginEmail">Email</label>
+      <input type="email" id="loginEmail" placeholder="you@example.com" required>
+      <p class="field-error" id="loginEmailError">Enter your email to log in.</p>
+    </div>
+
+    <div class="field" id="loginPasswordField">
+      <label for="loginPassword">Password</label>
+      <input type="password" id="loginPassword" placeholder="••••••••" required>
+      <p class="field-error" id="loginPasswordError">Enter your password.</p>
+    </div>
+
+    <button type="submit" class="blue-btn">Log in</button>
+
+    <p class="auth-switch">New here? <a data-goto-tab="register">Create an account</a></p>
+  </form>
+
+  <!-- Register form -->
+  <form id="registerForm" data-auth-panel="register" novalidate hidden>
+    <h2>Create your account</h2>
+
+    <div class="field" id="regNameField">
+      <label for="regName">Full name</label>
+      <input type="text" id="regName" placeholder="Ava Martins" required>
+      <p class="field-error" id="regNameError">Enter your name.</p>
+    </div>
+
+    <div class="field" id="regEmailField">
+      <label for="regEmail">Email</label>
+      <input type="email" id="regEmail" placeholder="you@example.com" required>
+      <p class="field-error" id="regEmailError">Enter a valid email.</p>
+    </div>
+
+    <div class="field" id="regPasswordField">
+      <label for="regPassword">Password</label>
+      <input type="password" id="regPassword" placeholder="At least 6 characters" required minlength="6">
+      <p class="field-error" id="regPasswordError">Password must be at least 6 characters.</p>
+    </div>
+
+    <button type="submit" class="blue-btn">Create account</button>
+
+    <p class="auth-switch">Already have an account? <a data-goto-tab="login">Log in</a></p>
+  </form>
+</div>
+</main>
+
+
+<script>
+(function(){
+  const tabButtons = document.querySelectorAll('.auth-tabs button[role="tab"]');
+  const panels = {
+    login: document.getElementById('loginForm'),
+    register: document.getElementById('registerForm')
+  };
+
+  function setTab(mode){
+    tabButtons.forEach(btn => btn.setAttribute('aria-selected', btn.dataset.tab === mode ? 'true' : 'false'));
+    Object.entries(panels).forEach(([key, form]) => { form.hidden = key !== mode; });
+  }
+
+  tabButtons.forEach(btn => btn.addEventListener('click', () => setTab(btn.dataset.tab)));
+  document.querySelectorAll('[data-goto-tab]').forEach(link => {
+    link.addEventListener('click', () => setTab(link.dataset.gotoTab));
+  });
+
+  function clearError(fieldId){
+    const field = document.getElementById(fieldId);
+    field.classList.remove('has-error');
+    field.querySelector('.field-error').classList.remove('visible');
+  }
+  function showError(fieldId){
+    const field = document.getElementById(fieldId);
+    field.classList.add('has-error');
+    field.querySelector('.field-error').classList.add('visible');
+  }
+
+  // ---- Login submit ----
+  document.getElementById('loginForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    let valid = true;
+    clearError('loginEmailField');
+    clearError('loginPasswordField');
+
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
+
+    if(email === ''){ showError('loginEmailField'); valid = false; }
+    if(password === ''){ showError('loginPasswordField'); valid = false; }
+    if(!valid) return;
+
+    // No backend here — simulate a successful login and redirect to the homepage.
+    const name = email.split('@')[0] || 'Traveler';
+    const display = name.charAt(0).toUpperCase() + name.slice(1);
+    window.location.href = `homepage.html?name=${encodeURIComponent(display)}`;
+  });
+
+  // ---- Register submit ----
+  document.getElementById('registerForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    let valid = true;
+    clearError('regNameField');
+    clearError('regEmailField');
+    clearError('regPasswordField');
+
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const password = document.getElementById('regPassword').value;
+
+    if(name === ''){ showError('regNameField'); valid = false; }
+    if(email === ''){ showError('regEmailField'); valid = false; }
+    if(password.length < 6){ showError('regPasswordField'); valid = false; }
+    if(!valid) return;
+
+    // No backend here — simulate a successful registration and redirect to the homepage.
+    window.location.href = `homepage.html?name=${encodeURIComponent(name.split(' ')[0])}`;
+  });
+})();
+</script>
+
+</body>
+</html>
